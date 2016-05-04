@@ -144,27 +144,28 @@ immediate：为16位立即数，用作无符号的逻辑操作数、有符号的
 
 相关部件及引脚说明：<br>
 Instruction Memory：指令存储器，<br>
-        Iaddr，指令地址输入端口<br>
-        DataIn，存储器数据输入端口<br>
-        DataOut，存储器数据输出端口<br>
-        RW，指令存储器读写控制信号，为1写，为0读<br>
+        *Iaddr，指令地址输入端口<br>
+        *DataIn，存储器数据输入端口<br>
+        *DataOut，存储器数据输出端口<br>
+        *RW，指令存储器读写控制信号，为1写，为0读<br>
 Data Memory：数据存储器，<br>
-        Daddr，数据地址输入端口<br>
-        DataIn，存储器数据输入端口<br>
-        DataOut，存储器数据输出端口<br>
-        RW，数据存储器读写控制信号，为1写，为0读<br>
+        *Daddr，数据地址输入端口<br>
+        *DataIn，存储器数据输入端口<br>
+        *DataOut，存储器数据输出端口<br>
+        *RW，数据存储器读写控制信号，为1写，为0读<br>
 Register File：（寄存器组）<br>
-        Read Reg1，rs寄存器地址输入端口<br>
-        Read Reg2，rt寄存器地址输入端口<br>
-        Write Reg，将数据写入的寄存器，其地址输入端口（rt、rd）<br>
-        Write Data，写入寄存器的数据输入端口<br>
-        Read Data1，rs寄存器数据输出端口<br>
-        Read Data2，rt寄存器数据输出端口<br>
-        WE，写使能信号，为1时，在时钟上升沿写入<br>
-IR：    指令寄存器，用于存放正在执行的指令代码<br>
+        *Read Reg1，rs寄存器地址输入端口<br>
+        *Read Reg2，rt寄存器地址输入端口<br>
+        *Write Reg，将数据写入的寄存器，其地址输入端口（rt、rd）<br>
+        *Write Data，写入寄存器的数据输入端口<br>
+        *Read Data1，rs寄存器数据输出端口<br>
+        *Read Data2，rt寄存器数据输出端口<br>
+        *WE，写使能信号，为1时，在时钟上升沿写入<br>
+IR：
+        *指令寄存器，用于存放正在执行的指令代码<br>
 ALU：<br>
-        result，ALU运算结果<br>
-        zero，运算结果标志，结果为0输出1，否则输出0<br>
+        *result，ALU运算结果<br>
+        *zero，运算结果标志，结果为0输出1，否则输出0<br>
 
 
 ###ALU运算功能表
