@@ -1,10 +1,10 @@
 #多周期CPU设计
 
 ##一、 实验目的
-(1) 认识和掌握多周期数据通路原理及其设计方法；
-(2) 掌握多周期CPU的实现方法，代码实现方法；
-(3) 编写一个编译器，将MIPS汇编程序编译为二进制机器码；
-(4) 掌握多周期CPU的测试方法。
+(1) 认识和掌握多周期数据通路原理及其设计方法；<br>
+(2) 掌握多周期CPU的实现方法，代码实现方法；<br>
+(3) 编写一个编译器，将MIPS汇编程序编译为二进制机器码；<br>
+(4) 掌握多周期CPU的测试方法。<br>
 
 ##二、 实验内容
 设计一个多周期CPU，该CPU至少能实现以下指令功能操作。需设计的指令与格式如下：（说明：操作码按照以下规定使用，都给每类指令预留扩展空间，后续实验相同。）
@@ -12,78 +12,69 @@
 **算术运算指令**
 
 （1）add  rd , rs, rt
-![](images/add.png)
+![](images/add.png)<br>
 功能：rd<－rs + rt
 
 （2）sub  rd , rs , rt
 
-![](images/sub.png)
+![](images/sub.png)<br>
 完成功能：rd<－rs － rt
 
 （3）addi  rt , rs , immediate
-![](images/addi.png)
+![](images/addi.png)<br>
 功能：rt<－rs + (sign-extend)immediate
 
 **逻辑运算指令**
 
-（4）or  rd , rs , rt
-![](images/or.png)
+（4）or  rd , rs , rt<br>
+![](images/or.png)<br>
 功能：rd<－rs | rt
 
-（5）and  rd , rs , rt
-
-![](images/and.png)
+（5）and  rd , rs , rt<br>
+![](images/and.png)<br>
 功能：rd<－rs & rt
 
 （6）ori  rt , rs ,immediate
-![](images/ori.png)
-
+![](images/ori.png)<br>
 功能：rt<－rs | (zero-extend)immediate
 
 **移位指令**
 （7）sll  rd, rs,sa
-![](images/sll.png)
-
+![](images/sll.png)<br>
 功能：rd<－rs<<(zero-extend)sa，左移sa位 ，(zero-extend)sa
 
 **传送指令**
 （8）move  rd , rs
-![](images/move.png)
-
+![](images/move.png)<br>
 功能：rd<－rs + $0
 
 **比较指令**
 （9） slt  rd , rs , rt
-![](images/slt.png)
-
-功能：如果（rs<rt），则rd=1;  否则 rd=0
+![](images/slt.png)<br>
+功能：如果（rs < rt），则rd=1;  否则 rd=0
 
 **存储器读写指令**
 （10）sw  rt ,immediate(rs)
-![](images/sw.png)
-
+![](images/sw.png)<br>
 功能：memory[rs+ (sign-extend)immediate]<－rt
 
 （11）lw  rt , immediate(rs)
-![](images/lw.png)
-
+![](images/lw.png)<br>
 功能：rt <－ memory[rs + (sign-extend)immediate]
 
 **分支指令**
 （12）beq  rs,rt,immediate (说明：immediate是从pc+4开始和转移到的指令之间间隔条数)
-![](images/beq.png)
-
+![](images/beq.png)<br>
 功能：if(rs=rt) pc <－pc + 4 + (sign-extend)immediate <<2
 
 **跳转指令**
 （13）j  addr
-![](images/j.png)
-
-功能：pc <pc[31..28],addr,0,0，转移
+![](images/j.png)<br>
+功能：pc < pc[31..28],addr,0,0，转移
 
 （14）jr  rs
-![](images/jr.png)
 
+![](images/jr.png)<br>
 功能：pc <－ rs，转移
 
 **调用子程序指令**
@@ -123,21 +114,14 @@ J类型：
 ![](images/Jtype.png)
 
 其中，
-op：为操作码；
-
-rs：为第1个源操作数寄存器，寄存器地址（编号）是00000~11111，00~1F；
-
-rt：为第2个源操作数寄存器，或目的操作数寄存器，寄存器地址（同上）；
-
-rd：为目的操作数寄存器，寄存器地址（同上）；
-
-sa：为位移量（shift amt），移位指令用于指定移多少位；
-
-func：为功能码，在寄存器类型指令中（R类型）用来指定指令的功能；
-
+op：为操作码；<br>
+rs：为第1个源操作数寄存器，寄存器地址（编号）是00000~11111，00~1F；<br>
+rt：为第2个源操作数寄存器，或目的操作数寄存器，寄存器地址（同上）；<br>
+rd：为目的操作数寄存器，寄存器地址（同上）；<br>
+sa：为位移量（shift amt），移位指令用于指定移多少位；<br>
+func：为功能码，在寄存器类型指令中（R类型）用来指定指令的功能；<br>
 immediate：为16位立即数，用作无符号的逻辑操作数、有符号的算术操作数、数据加载（Laod）/数据保存（Store）指令的数据地址字节偏移量和分支指令中相对程序计数器（PC）的有符号偏移量；
-    address：为地址。
-
+    address：为地址。<br>
 
 ###多周期CPU状态转移图
 状态的转移有的是无条件的，例如从IF状态转移到ID 和 EXE状态就是无条件的；有些是有条件的，例如ID 或 EXE状态之后不止一个状态，到底转向哪个状态由该指令功能，即指令操作码决定。每个状态代表一个时钟周期。
@@ -158,29 +142,30 @@ immediate：为16位立即数，用作无符号的逻辑操作数、有符号的
 ![](images/control2.png)
 
 
-相关部件及引脚说明：
-Instruction Memory：指令存储器，
-        Iaddr，指令地址输入端口
-        DataIn，存储器数据输入端口
-        DataOut，存储器数据输出端口
-        RW，指令存储器读写控制信号，为1写，为0读
-Data Memory：数据存储器，
-        Daddr，数据地址输入端口
-        DataIn，存储器数据输入端口
-        DataOut，存储器数据输出端口
-        RW，数据存储器读写控制信号，为1写，为0读
-Register File：（寄存器组）
-        Read Reg1，rs寄存器地址输入端口
-        Read Reg2，rt寄存器地址输入端口
-        Write Reg，将数据写入的寄存器，其地址输入端口（rt、rd）
-        Write Data，写入寄存器的数据输入端口
-        Read Data1，rs寄存器数据输出端口
-        Read Data2，rt寄存器数据输出端口
-        WE，写使能信号，为1时，在时钟上升沿写入
-IR：    指令寄存器，用于存放正在执行的指令代码
-ALU：
-        result，ALU运算结果
-        zero，运算结果标志，结果为0输出1，否则输出0
+相关部件及引脚说明：<br>
+Instruction Memory：指令存储器，<br>
+        Iaddr，指令地址输入端口<br>
+        DataIn，存储器数据输入端口<br>
+        DataOut，存储器数据输出端口<br>
+        RW，指令存储器读写控制信号，为1写，为0读<br>
+Data Memory：数据存储器，<br>
+        Daddr，数据地址输入端口<br>
+        DataIn，存储器数据输入端口<br>
+        DataOut，存储器数据输出端口<br>
+        RW，数据存储器读写控制信号，为1写，为0读<br>
+Register File：（寄存器组）<br>
+        Read Reg1，rs寄存器地址输入端口<br>
+        Read Reg2，rt寄存器地址输入端口<br>
+        Write Reg，将数据写入的寄存器，其地址输入端口（rt、rd）<br>
+        Write Data，写入寄存器的数据输入端口<br>
+        Read Data1，rs寄存器数据输出端口<br>
+        Read Data2，rt寄存器数据输出端口<br>
+        WE，写使能信号，为1时，在时钟上升沿写入<br>
+IR：    指令寄存器，用于存放正在执行的指令代码<br>
+ALU：<br>
+        result，ALU运算结果<br>
+        zero，运算结果标志，结果为0输出1，否则输出0<br>
+
 
 ###ALU运算功能表
 ![](images/ALU.png)
