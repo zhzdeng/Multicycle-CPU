@@ -8,12 +8,15 @@
 
 ##二、 实验内容
 设计一个多周期CPU，该CPU至少能实现以下指令功能操作。需设计的指令与格式如下：（说明：操作码按照以下规定使用，都给每类指令预留扩展空间，后续实验相同。）
+
 **算术运算指令**
+
 （1）add  rd , rs, rt
 ![](images/add.png)
 功能：rd<－rs + rt
 
 （2）sub  rd , rs , rt
+
 ![](images/sub.png)
 完成功能：rd<－rs － rt
 
@@ -22,68 +25,81 @@
 功能：rt<－rs + (sign-extend)immediate
 
 **逻辑运算指令**
+
 （4）or  rd , rs , rt
 ![](images/or.png)
 功能：rd<－rs | rt
 
 （5）and  rd , rs , rt
+
 ![](images/and.png)
 功能：rd<－rs & rt
 
 （6）ori  rt , rs ,immediate
 ![](images/ori.png)
+
 功能：rt<－rs | (zero-extend)immediate
 
 **移位指令**
 （7）sll  rd, rs,sa
 ![](images/sll.png)
+
 功能：rd<－rs<<(zero-extend)sa，左移sa位 ，(zero-extend)sa
 
 **传送指令**
 （8）move  rd , rs
 ![](images/move.png)
+
 功能：rd<－rs + $0
 
 **比较指令**
 （9） slt  rd , rs , rt
 ![](images/slt.png)
+
 功能：如果（rs<rt），则rd=1;  否则 rd=0
 
 **存储器读写指令**
 （10）sw  rt ,immediate(rs)
 ![](images/sw.png)
+
 功能：memory[rs+ (sign-extend)immediate]<－rt
 
 （11）lw  rt , immediate(rs)
 ![](images/lw.png)
+
 功能：rt <－ memory[rs + (sign-extend)immediate]
 
 **分支指令**
 （12）beq  rs,rt,immediate (说明：immediate是从pc+4开始和转移到的指令之间间隔条数)
 ![](images/beq.png)
+
 功能：if(rs=rt) pc <－pc + 4 + (sign-extend)immediate <<2
 
 **跳转指令**
 （13）j  addr
 ![](images/j.png)
+
 功能：pc <pc[31..28],addr,0,0，转移
 
 （14）jr  rs
 ![](images/jr.png)
+
 功能：pc <－ rs，转移
 
 **调用子程序指令**
 （15）jal  addr
 ![](images/jal.png)
+
 功能：调用子程序，pc <－ pc[31..28],addr,0,0；$31<－pc+4，返回地址设置；子程序返回，需用指令 jr $31。
 
 **停机指令**
 （16）halt (停机指令)
 ![](images/halt.png)
+
 不改变pc的值，pc保持不变。
 
 ###实验原理
-    多周期CPU指的是将整个CPU的执行过程分成几个阶段，每个阶段用一个时钟去完成，然后开始下一条指令的执行，而每种指令执行时所用的时钟数不尽相同，这就是所谓的多周期CPU。CPU在处理指令时，一般需要经过以下几个阶段：
+多周期CPU指的是将整个CPU的执行过程分成几个阶段，每个阶段用一个时钟去完成，然后开始下一条指令的执行，而每种指令执行时所用的时钟数不尽相同，这就是所谓的多周期CPU。CPU在处理指令时，一般需要经过以下几个阶段：
     (1) 取指令(IF)：根据程序计数器pc中的指令地址，从存储器中取出一条指令，同时，pc根据指令字长度自动递增产生下一条指令所需要的指令地址，但遇到“地址转移”指令时，则控制器把“转移地址”送入pc，当然得到的“地址”需要做些变换才送入pc。
     (2) 指令译码(ID)：对取指令操作中得到的指令进行分析并译码，确定这条指令需要完成的操作，从而产生相应的操作控制信号，用于驱动执行状态中的各种操作。
     (3) 指令执行(EXE)：根据指令译码得到的操作控制信号，具体地执行指令动作，然后转移到结果写回状态。
@@ -92,25 +108,36 @@
     实验中就按照这五个阶段进行设计，这样一条指令的执行最长需要五个(小)时钟周期才能完成，但具体情况怎样？要根据该条指令的情况而定，有些指令不需要五个时钟周期的，这就是多周期的CPU。
 
 ![](images/process.png)
+
 MIPS32的指令的三种格式：
 R类型：
+
 ![](images/Rtype.png)
 
 I类型：
+
 ![](images/Itype.png)
 
 J类型：
+
 ![](images/Jtype.png)
 
 其中，
 op：为操作码；
+
 rs：为第1个源操作数寄存器，寄存器地址（编号）是00000~11111，00~1F；
+
 rt：为第2个源操作数寄存器，或目的操作数寄存器，寄存器地址（同上）；
+
 rd：为目的操作数寄存器，寄存器地址（同上）；
+
 sa：为位移量（shift amt），移位指令用于指定移多少位；
+
 func：为功能码，在寄存器类型指令中（R类型）用来指定指令的功能；
+
 immediate：为16位立即数，用作无符号的逻辑操作数、有符号的算术操作数、数据加载（Laod）/数据保存（Store）指令的数据地址字节偏移量和分支指令中相对程序计数器（PC）的有符号偏移量；
     address：为地址。
+
 
 ###多周期CPU状态转移图
 状态的转移有的是无条件的，例如从IF状态转移到ID 和 EXE状态就是无条件的；有些是有条件的，例如ID 或 EXE状态之后不止一个状态，到底转向哪个状态由该指令功能，即指令操作码决定。每个状态代表一个时钟周期。
