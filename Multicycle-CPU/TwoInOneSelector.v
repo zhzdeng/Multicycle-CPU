@@ -18,7 +18,7 @@
 // Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
-module BitTwoInOneSelector32Bit(
+module TwoInOneSelector32Bit(
     input [31:0] ZeroInput,
     input [31:0] OneInput,
     input Control,

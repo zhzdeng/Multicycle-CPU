@@ -29,12 +29,12 @@ module InstructionRom(
 	 reg [7:0] member [0:255];
 
 	 initial
-		$readmemh ("myRomData.list", member);
+		$readmemh("myRomData.list", member);
 
 	 always @(address or RW)
 		begin
 			if (RW == 1) begin
-				member[address] <= read_data[31:24];
+				member[address]     <= read_data[31:24];
 				member[address + 1] <= read_data[23:16];
 				member[address + 2] <= read_data[15:8];
 				member[address + 3] <= read_data[7:0];

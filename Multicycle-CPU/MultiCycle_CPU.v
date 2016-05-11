@@ -77,6 +77,7 @@ InstructionRom instructionrom(
     .RW(InsMemRW),                     // 读写控制端 1 写; 0 读 应该保持为0
     .read_data(_IRin)                  // 数据输出端
     );
+
 // ID
 IR ir(
     .instructionIn(_IRin),
@@ -112,7 +113,7 @@ ThreeInOneSelector5Bit writeregseletr(
     .DataOutput(_thirdRg)
     );
 
-BitTwoInOneSelector32Bit writedata(
+TwoInOneSelector32Bit writedata(
     .ZeroInput(_Pc0),
     .OneInput(_ALUM2DRout),
     .Control(WrRegData),
@@ -191,7 +192,7 @@ DataRam dataram(
     .DataOut(_DataOut)       // 数据存储器数据输出端口
    );
 
-BitTwoInOneSelector32Bit DataOutputSelector(
+TwoInOneSelector32Bit DataOutputSelector(
       .ZeroInput(_ALUResult),
       .OneInput(_DataOut),
       .Control(ALUM2Reg),

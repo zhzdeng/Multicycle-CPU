@@ -21,12 +21,12 @@
 module IR(
     input [31:0] instructionIn,
     input IRWre,
-  	input CLK,
+  	 input CLK,
     output reg [31:0] instructionOut
     );
 
     always @(posedge CLK) begin
-	     if (IRWre == 1) instructionOut = instructionOut;
+	     if (IRWre == 1) instructionOut = instructionIn;
 	 end
 
 endmodule

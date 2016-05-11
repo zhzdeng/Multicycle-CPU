@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLCompiler" num="568" delta="unknown" >"Y:/Desktop/Multicycle-CPU/Multicycle-CPU/Control_Unit.v" Line 225: Constant value is truncated to fit in &lt;<arg fmt="%d" index="1">2</arg>&gt; bits.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"Y:/Desktop/Multicycle-CPU/Multicycle-CPU/MultiCycle_CPU.v" Line 184: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">dataOut</arg>&gt;. Formal port size is <arg fmt="%d" index="2">32</arg>-bit while actual signal size is <arg fmt="%d" index="1">1</arg>-bit.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"Y:/Desktop/Multicycle-CPU/Multicycle-CPU/MultiCycle_CPU.v" Line 60: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">RST</arg>&gt;. Formal port size is <arg fmt="%d" index="2">1</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"Y:/Desktop/Multicycle-CPU/Multicycle-CPU/MultiCycle_CPU.v" Line 94: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">RST</arg>&gt;. Formal port size is <arg fmt="%d" index="2">1</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"Y:/Desktop/Multicycle-CPU/Multicycle-CPU/MultiCycle_CPU.v" Line 104: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">ALUOp</arg>&gt;. Formal port size is <arg fmt="%d" index="2">3</arg>-bit while actual signal size is <arg fmt="%d" index="1">1</arg>-bit.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"Y:/Desktop/Multicycle-CPU/Multicycle-CPU/MultiCycle_CPU.v" Line 130: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">CleanAllControl</arg>&gt;. Formal port size is <arg fmt="%d" index="2">1</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"Y:/Desktop/Multicycle-CPU/Multicycle-CPU/MultiCycle_CPU.v" Line 174: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">ALUOp</arg>&gt;. Formal port size is <arg fmt="%d" index="2">3</arg>-bit while actual signal size is <arg fmt="%d" index="1">1</arg>-bit.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"Y:/Desktop/Multicycle-CPU/Multicycle-CPU/MultiCycle_CPU.v" Line 188: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">address</arg>&gt;. Formal port size is <arg fmt="%d" index="2">32</arg>-bit while actual signal size is <arg fmt="%d" index="1">1</arg>-bit.
+</msg>
+
+</messages>
+
