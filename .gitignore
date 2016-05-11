@@ -1,7 +1,6 @@
 TextFile_beh.prj
 xilinxsim.ini
 TextFile_isim_beh.exe
-isim/*
 fuse.log
 isim.log
 isim.cmd
@@ -18,7 +17,6 @@ webtalk_pn.xml
 SingleCycleCPU.ngc
 InstructionRom.ngr
 SingleCycleCPU.ngr
-xst/*
 SingleCycleCPU.cmd_log
 xst.xmsgs
 SingleCycleCPU.stx
@@ -26,7 +24,6 @@ SingleCycleCPU.stx
 *.stx
 *.xst
 *.wdb
-_xmsgs/*
 PC_isim_beh.exe
 TextFile_beh.prj
 TextFile_isim_beh.exe
@@ -36,3 +33,6 @@ isim
 isim.cmd
 isim.log
 xilinxsim.ini
+Multicycle-CPU/isim/*
+Multicycle-CPU/xst/*
+Multicycle-CPU/_xmsgs/*
