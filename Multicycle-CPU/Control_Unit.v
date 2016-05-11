@@ -52,12 +52,12 @@ module Control_Unit(
 			else begin
 				case(curState)
 					3'b000: begin // IF 这里没有考虑halt
-						PCWre     <= z;
-						ALUSrcB   <= z;
-						ALUM2Reg  <= z;
-						RegWre    <= z;
-						WrRegData <= z;
-						DataMemRW <= z;
+						PCWre     <= 1;
+						ALUSrcB   <= 1'bz;
+						ALUM2Reg  <= 1'bz;
+						RegWre    <= 1;
+						WrRegData <= 1'bz;
+						DataMemRW <= 1'bz;
 						IRWre     <= 1;
 						Extsel    <= 2'bzz;
 						ALUOp     <= 3'bzzz;
@@ -68,12 +68,12 @@ module Control_Unit(
 
 					3'b001: begin // ID
 						RegWre    <= 0;
-						DataMemRW <= z;
+						DataMemRW <= 1'bz;
 						PCWre     <= 0;
 						IRWre     <= 0;
 
 						// 这里操作码有问题
-						case(opcode) begin
+						case(opcode)
 							6'b000000: begin // add
 								ALUSrcB   <= 0;
 								ALUM2Reg  <= 0;
@@ -91,7 +91,7 @@ module Control_Unit(
 								RegOut    <= 2'b10;
 								_ALUOp    <= 3'b001;
 								curState  <= 3'b110;
-							end;
+							end
 							6'b000010: begin // addi
 								ALUSrcB   <= 1;
 								ALUM2Reg  <= 0;
@@ -101,7 +101,7 @@ module Control_Unit(
 								RegOut    <= 2'b01;
 								_ALUOp    <= 3'b000;
 								curState  <= 3'b110;
-							end;
+							end
 							6'b010000: begin // or
 								ALUSrcB   <= 0;
 								ALUM2Reg  <= 0;
@@ -110,7 +110,7 @@ module Control_Unit(
 								RegOut    <= 2'b10;
 								_ALUOp    <= 3'b101;
 								curState  <= 3'b110;
-							end;
+							end
 							6'b010001: begin // and
 								ALUSrcB   <= 0;
 								ALUM2Reg  <= 0;
@@ -119,7 +119,7 @@ module Control_Unit(
 								RegOut    <= 2'b10;
 								_ALUOp    <= 3'b110;
 								curState  <= 3'b110;
-							end;
+							end
 							6'b010010: begin // ori
 								ALUSrcB   <= 1;
 								ALUM2Reg  <= 0;
@@ -129,7 +129,7 @@ module Control_Unit(
 								RegOut    <= 2'b01;
 								_ALUOp    <= 3'b101;
 								curState  <= 3'b110;
-							end;
+							end
 							6'b011000: begin // sll
 								ALUSrcB   <= 1;
 								ALUM2Reg  <= 0;
@@ -139,7 +139,7 @@ module Control_Unit(
 								RegOut    <= 2'b10;
 								_ALUOp    <= 3'b100;
 								curState  <= 3'b110;
-							end;
+							end
 							6'b100000: begin // move
 								ALUSrcB   <= 0;
 								ALUM2Reg  <= 0;
@@ -148,7 +148,7 @@ module Control_Unit(
 								RegOut    <= 2'b10;
 								_ALUOp    <= 3'b000;
 								curState  <= 3'b110;
-							end;
+							end
 							6'b100111: begin // slt
 								ALUSrcB   <= 0;
 								ALUM2Reg  <= 0;
@@ -157,14 +157,14 @@ module Control_Unit(
 								RegOut    <= 2'b10;
 								_ALUOp    <= 3'b010;
 								curState  <= 3'b110;
-							end;
+							end
 							6'b110000: begin // sw
 								ALUSrcB  <= 1;
 								PCSrc    <= 2'b00;
 								Extsel   <= 2'b10;
 								_ALUOp   <= 3'b000;
 								curState <= 3'b010;
-							end;
+							end
 							6'b110001: begin // lw
 								ALUSrcB   <= 1;
 								ALUM2Reg  <= 1;
@@ -174,36 +174,31 @@ module Control_Unit(
 								RegOut    <= 2'b01;
 								_ALUOp    <= 3'b000;
 								curState  <= 3'b010;
-							end;
+							end
 							6'b110100: begin // beq  此处不设置PCSrc 在curStart=101处设置
 								ALUSrcB  <= 0;
 								Extsel   <= 2'b10;
-								_ALUOp   <= 3'b001;
+								_ALUOp   <= 3'b111;
 								curState <= 3'b101;
-							end;
+							end
 							6'b111000: begin // j
-								PCWre    <= 1;
-								IRWre    <= 1;
 								PCSrc    <= 2'b11;
 								curState <= 3'b000;
-							end;
+							end
 							6'b111001: begin // jr
-								PCWre    <= 1;
-								IRWre    <= 1;
 								PCSrc    <= 2'b10;
 								curState <= 3'b000;
-							end;
+							end
 							6'b111010: begin // jal
-								PCWre     <= 1;
-								IRWre     <= 1;
 								WrRegData <= 0;
+								RegWre    <= 1;
 								PCSrc     <= 2'b11;
 								curState  <= 3'b000;
-							end;
+							end
 							6'b111111: begin // halt
 								curState <= 3'b000;
-							end;
-						end
+							end
+						endcase
 					end
 
 					3'b110: begin // EXE add,sub,addi,or,and,ori,move,slt,sll
@@ -212,8 +207,6 @@ module Control_Unit(
 					end
 
 					3'b101: begin // EXE beq
-						PCWre    <= 1;
-						IRWre    <= 1;
 						ALUOp    <= _ALUOp;
 						curState <= 3'b000;
 					end
@@ -224,8 +217,6 @@ module Control_Unit(
 					end
 
 					3'b111: begin // WB
-						PCWre    <= 1;
-						IRWre    <= 1;
 						RegWre   <= 1;
 						curState <= 3'b000;
 					end
@@ -233,8 +224,6 @@ module Control_Unit(
 					3'b011: begin // MEM
 						if (opcode == 2'b110000) begin // sw
 								 DataMemRW <= 1;
-								 PCWre     <= 1;
-								 IRWre     <= 1;
 								 curState  <= 3'b000;
 							end
 						else begin
@@ -244,16 +233,15 @@ module Control_Unit(
 					end
 
 					3'b100: begin // WB
-						PCWre    <= 1;
-						IRWre    <= 1;
 						RegWre   <= 1;
 						curState <= 3'b000;
 					end
+				endcase
 			end
 		end
 
 		always @(opcode or zero) begin
 			if (opcode == 6'b110100)
-				PCSrc = zero == 0 ? 2'b00 : 2'b01;
+				PCSrc = zero == 1 ? 2'b00 : 2'b01;
 		end
 endmodule

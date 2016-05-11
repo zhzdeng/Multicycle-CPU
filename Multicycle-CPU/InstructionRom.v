@@ -30,6 +30,7 @@ module InstructionRom(
 
 	 initial
 		$readmemh ("myRomData.list", member);
+
 	 always @(address or RW)
 		begin
 			if (RW == 1) begin

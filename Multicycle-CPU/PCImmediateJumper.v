@@ -3,9 +3,9 @@
 // Company:
 // Engineer:
 //
-// Create Date:    18:37:22 05/10/2016
+// Create Date:    23:46:08 05/10/2016
 // Design Name:
-// Module Name:    PCIncrementer
+// Module Name:    PCImmediateJumper
 // Project Name:
 // Target Devices:
 // Tool versions:
@@ -18,12 +18,13 @@
 // Additional Comments:
 //
 //////////////////////////////////////////////////////////////////////////////////
-module PCIncrementer(
+module PCImmediateJumper(
     input [31:0] PC0,
-    output reg [31:0] PC4
+    input [25:0] immediate,
+    output reg [31:0] PC1
     );
 
-    always @(PC0) begin
-	     PC4 = PC0 + 4;
-	 end
+    always @(immediate) begin
+	     PC1 = {PC0[31:28], immediate, 2 'b00};
+    	end
 endmodule
