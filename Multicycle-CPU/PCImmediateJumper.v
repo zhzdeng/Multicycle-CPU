@@ -23,7 +23,6 @@ module PCImmediateJumper(
     input [25:0] immediate,
     output reg [31:0] PC1
     );
-
     always @(immediate) begin
 	     PC1 = {PC0[31:28], immediate, 2 'b00};
     	end

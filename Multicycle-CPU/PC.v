@@ -25,7 +25,6 @@ module PC(
     input RST,
     output reg [31:0] addressOut
     );
-
 	 initial
 	     addressOut = 32 'h00000000;
 

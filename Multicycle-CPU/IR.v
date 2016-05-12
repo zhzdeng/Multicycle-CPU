@@ -21,7 +21,7 @@
 module IR(
     input [31:0] instructionIn,
     input IRWre,
-  	 input CLK,
+  	input CLK,
     output reg [31:0] instructionOut
     );
 
