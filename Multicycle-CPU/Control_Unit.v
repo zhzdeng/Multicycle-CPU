@@ -48,7 +48,7 @@ module Control_Unit(
 		end
 
 		always @(posedge clk) begin
-			if (RST == 0) curState = 3'b000;
+			if (RST == 1) curState = 3'b000;
 			else begin
 				case(curState)
 					3'b000: begin // IF 这里没有考虑halt
@@ -59,7 +59,7 @@ module Control_Unit(
 						WrRegData <= 1'bz;
 						DataMemRW <= 1'bz;
 						IRWre     <= 1;
-						Extsel    <= 2'bzz;
+						Extsel    <= 2'b11;
 						ALUOp     <= 3'bzzz;
 						PCSrc     <= 2'bzz;
 						RegOut    <= 2'bzz;

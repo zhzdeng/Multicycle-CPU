@@ -31,6 +31,7 @@ module MultiCycle_CPU(
     input [1:0]PCSrc,
     input DataMemRW,
     input zero,
+    input [2:0]ALUOp,
     // 中间数据
     input [31:0]_PcIn,
     input [31:0]_Pc0,

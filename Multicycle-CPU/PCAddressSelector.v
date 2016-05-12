@@ -27,6 +27,9 @@ module PCAddressSelector(
     output reg [31:0] addressOut
     );
 
+   initial
+    addressOut = 32'h00000000;
+
 	 always @(origin or withOffset or immediate or inRegister or PCSrc) begin
 	     case (PCSrc)
 		    2 'b00: begin

@@ -26,34 +26,35 @@ module textFile;
 
 	// Inputs
 	reg clk;
-	reg [1:0] Extsel;
-	reg PCWre;
-	reg InsMemRW;
-	reg [1:0] RegOut;
-	reg RegWre;
-	reg ALUSrcB;
-	reg ALUM2Reg;
-	reg [1:0] PCSrc;
-	reg DataMemRW;
-	reg zero;
-	reg [31:0] _PcIn;
-	reg [31:0] _Pc0;
-	reg [31:0] _Pc4;
-	reg [31:0] _instruction;
-	reg [4:0] _thirdRg;
-	reg [31:0] _ALUM2DRout;
-	reg [31:0] _WBdata;
-	reg [31:0] _RgData1;
-	reg [31:0] _RgData2;
-	reg [31:0] _extendOut;
-	reg [31:0] _pcaddrSelect1;
-	reg [31:0] _IRin;
-	reg [31:0] _PCextendOut;
-	reg [31:0] _ADROut;
-	reg [31:0] _BDROut;
-	reg [31:0] _ALUResult;
-	reg [31:0] _DataOut;
-	reg [31:0] _WriteData;
+	wire [1:0] Extsel;
+	wire PCWre;
+	wire InsMemRW;
+	wire [1:0] RegOut;
+	wire RegWre;
+	wire ALUSrcB;
+	wire ALUM2Reg;
+	wire [1:0] PCSrc;
+	wire [2:0]ALUOp;
+	wire DataMemRW;
+	wire zero;
+	wire [31:0] _PcIn;
+	wire [31:0] _Pc0;
+	wire [31:0] _Pc4;
+	wire [31:0] _instruction;
+	wire [4:0] _thirdRg;
+	wire [31:0] _ALUM2DRout;
+	wire [31:0] _WBdata;
+	wire [31:0] _RgData1;
+	wire [31:0] _RgData2;
+	wire [31:0] _extendOut;
+	wire [31:0] _pcaddrSelect1;
+	wire [31:0] _IRin;
+	wire [31:0] _PCextendOut;
+	wire [31:0] _ADROut;
+	wire [31:0] _BDROut;
+	wire [31:0] _ALUResult;
+	wire [31:0] _DataOut;
+	wire [31:0] _WriteData;
 
 	// Instantiate the Unit Under Test (UUT)
 	MultiCycle_CPU uut (
@@ -66,6 +67,7 @@ module textFile;
 		.ALUSrcB(ALUSrcB),
 		.ALUM2Reg(ALUM2Reg),
 		.PCSrc(PCSrc),
+		.ALUOp(ALUOp),
 		.DataMemRW(DataMemRW),
 		.zero(zero),
 		._PcIn(_PcIn),
@@ -91,38 +93,38 @@ module textFile;
 	initial begin
 		// Initialize Inputs
 
-		Extsel = 0;
-		PCWre = 0;
-		InsMemRW = 0;
-		RegOut = 0;
-		RegWre = 0;
-		ALUSrcB = 0;
-		ALUM2Reg = 0;
-		PCSrc = 0;
-		DataMemRW = 0;
-		zero = 0;
-		_PcIn = 0;
-		_Pc0 = 0;
-		_Pc4 = 0;
-		_instruction = 0;
-		_thirdRg = 0;
-		_ALUM2DRout = 0;
-		_WBdata = 0;
-		_RgData1 = 0;
-		_RgData2 = 0;
-		_extendOut = 0;
-		_pcaddrSelect1 = 0;
-		_IRin = 0;
-		_PCextendOut = 0;
-		_ADROut = 0;
-		_BDROut = 0;
-		_ALUResult = 0;
-		_DataOut = 0;
-		_WriteData = 0;
+		// Extsel = 0;
+		// PCWre = 1;
+		// InsMemRW = 0;
+		// RegOut = 0;
+		// RegWre = 0;
+		// ALUSrcB = 0;
+		// ALUM2Reg = 0;
+		// PCSrc = 0;
+		// DataMemRW = 0;
+		// zero = 0;
+		// _PcIn = 0;
+		// _Pc0 = 32'hzzzzzzz;
+		// _Pc4 = 0;
+		// _instruction = 0;
+		// _thirdRg = 0;
+		// _ALUM2DRout = 0;
+		// _WBdata = 0;
+		// _RgData1 = 0;
+		// _RgData2 = 0;
+		// _extendOut = 0;
+		// _pcaddrSelect1 = 0;
+		// _IRin = 0;
+		// _PCextendOut = 0;
+		// _ADROut = 0;
+		// _BDROut = 0;
+		// _ALUResult = 0;
+		// _DataOut = 0;
+		// _WriteData = 0;
 		clk = 1;
-		forever #10 clk = !clk;
+		forever #50 clk = !clk;
 		// Wait 100 ns for global reset to finish
-		#100 $stop;
+		#300 $stop;
 
 		// Add stimulus here
 
