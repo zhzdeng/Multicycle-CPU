@@ -36,3 +36,13 @@ xilinxsim.ini
 Multicycle-CPU/isim/*
 Multicycle-CPU/xst/*
 Multicycle-CPU/_xmsgs/*
+*.exe
+isim.cmd
+textFile_isim_beh.exe
+textFile_isim_beh.wdb
+xilinxsim.ini
+textFile_stx_beh.prj
+textFile_beh.prj
+isim
+fuse.log
+isim.log
