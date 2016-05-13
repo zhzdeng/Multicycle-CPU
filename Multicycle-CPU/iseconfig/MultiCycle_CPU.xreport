@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2016-05-12T12:28:23</DateModified>
+  <DateModified>2016-05-13T13:17:58</DateModified>
   <ModuleName>MultiCycle_CPU</ModuleName>
   <SummaryTimeStamp>2016-05-11T21:01:20</SummaryTimeStamp>
-  <SavedFilePath>Y:/Desktop/Multicycle-CPU/Multicycle-CPU/iseconfig/MultiCycle_CPU.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>Y:/Desktop/Multicycle-CPU/Multicycle-CPU\</ImplementationReportsDirectory>
+  <SavedFilePath>C:/Users/Tommy Leo/Documents/GitHub/Multicycle-CPU/Multicycle-CPU/iseconfig/MultiCycle_CPU.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>C:/Users/Tommy Leo/Documents/GitHub/Multicycle-CPU/Multicycle-CPU\</ImplementationReportsDirectory>
   <DateInitialized>2016-05-11T16:12:09</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

@@ -1,0 +1,43 @@
+/*
+  1. These are the test instructions that are to be loaded.
+  2. On the bottom, there are those values that will be generated
+     and stored in register file and memory(in theory) during execution.
+  3. Also the order of how values change is listed in sequence.
+*/
+
+addi $1, $0, 100
+sll $2, $1, 1
+sub $3, $2, $1
+or $4, $1, $2
+and $5, $1, $2
+ori $6, $1, 50
+slt $7, $1, $2
+sw $5, 0($5)
+addi $5, $5, -1
+lw $8 1($5)
+jal 14
+j 13
+j 0
+halt
+add $5, $5, $7
+beq $8 $5 -2
+move $9, $8
+jr $31
+halt
+
+
+REG
+$1	100
+$2	200
+$3	100
+$4	236
+$5	64	63	64
+$6	118
+$7	1
+$8	64
+$9	64
+
+$31	44
+
+MEM
+64 64
