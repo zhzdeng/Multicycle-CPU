@@ -128,7 +128,7 @@ module textFile;
 		clk = 1;
 		forever #20 clk = !clk;
 		// Wait 100 ns for global reset to finish
-		#19000 $stop;
+		#3000 $stop;
 
 		// Add stimulus here
 
