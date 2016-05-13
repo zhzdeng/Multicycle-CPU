@@ -1,8 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
+<<<<<<< Updated upstream
   <DateModified>2016-05-11T15:22:54</DateModified>
   <ModuleName>MultiCycle_CPU</ModuleName>
+=======
+  <DateModified>2016-05-11T14:36:17</DateModified>
+  <ModuleName>PC</ModuleName>
+>>>>>>> Stashed changes
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
   <SavedFilePath>Y:/Desktop/Multicycle-CPU/Multicycle-CPU/iseconfig/PC.xreport</SavedFilePath>
   <ImplementationReportsDirectory>Y:/Desktop/Multicycle-CPU/Multicycle-CPU\</ImplementationReportsDirectory>
