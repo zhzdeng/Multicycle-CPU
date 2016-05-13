@@ -26,6 +26,8 @@ module TwoInOneSelector32Bit(
     );
 
    always @(Control or ZeroInput or OneInput) begin
-	   DataOutput = (Control == 1) ? OneInput : ZeroInput;
+      if (Control == 1) DataOutput = OneInput;
+      else if (Control == 0) DataOutput = ZeroInput;
+      else DataOutput = 32'hzzzzzzzz;
    end
 endmodule

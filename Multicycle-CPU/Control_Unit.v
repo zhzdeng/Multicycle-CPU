@@ -55,7 +55,7 @@ module Control_Unit(
 						PCWre     <= 1;
 						ALUSrcB   <= 1'bz;
 						ALUM2Reg  <= 1'bz;
-						RegWre    <= 1;
+						RegWre    <= 0;
 						WrRegData <= 1'bz;
 						DataMemRW <= 1'bz;
 						IRWre     <= 1;
@@ -191,6 +191,7 @@ module Control_Unit(
 							end
 							6'b111010: begin // jal
 								WrRegData <= 0;
+								RegOut    <= 2'b00;
 								RegWre    <= 1;
 								PCSrc     <= 2'b11;
 								curState  <= 3'b000;
@@ -207,6 +208,7 @@ module Control_Unit(
 					end
 
 					3'b101: begin // EXE beq
+						PCSrc    <= 2'b00;
 						ALUOp    <= _ALUOp;
 						curState <= 3'b000;
 					end
@@ -222,7 +224,7 @@ module Control_Unit(
 					end
 
 					3'b011: begin // MEM
-						if (opcode == 2'b110000) begin // sw
+						if (opcode == 6'b110000) begin // sw
 								 DataMemRW <= 1;
 								 curState  <= 3'b000;
 							end
@@ -240,8 +242,11 @@ module Control_Unit(
 			end
 		end
 
-		always @(opcode or zero) begin
-			if (opcode == 6'b110100)
-				PCSrc = zero == 1 ? 2'b00 : 2'b01;
+		always @(zero) begin
+			if (opcode == 6'b110100) begin
+				if (zero == 0) PCSrc = 2'b00;
+				else if (zero == 1) PCSrc = 2'b01;
+				else PCSrc = 2'bzz;
+			end
 		end
 endmodule

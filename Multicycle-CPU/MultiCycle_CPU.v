@@ -31,8 +31,10 @@ module MultiCycle_CPU(
     input [1:0]PCSrc,
     input DataMemRW,
     input zero,
+    input WrRegData,
     input [2:0]ALUOp,
     // 中间数据
+    input [31:0]_ALUout,
     input [31:0]_PcIn,
     input [31:0]_Pc0,
     input [31:0]_Pc4,
@@ -58,7 +60,7 @@ PC pc(
       .addressIn(_PcIn),                  // 指令输入，经过PC判断后输出
       .PCWre(PCWre),                      // CU控制信号
       .CLK(clk),                          // 时钟信号
-      .RST(0),                            // PC归零信号
+      .RST(1'b0),                            // PC归零信号
       .addressOut(_Pc0)                   // 指令输出
     );
 
@@ -92,7 +94,7 @@ Control_Unit cu(
     clk,
     _instruction[31:26],
     zero,
-    0,
+    1'b0,
     PCWre,                       // PC的enable 1: 工作 halt : 0;
     ALUSrcB,                     // ALU的数据端选择
     ALUM2Reg,                    // 只有lw：1
@@ -115,7 +117,7 @@ ThreeInOneSelector5Bit writeregseletr(
     );
 
 TwoInOneSelector32Bit writedata(
-    .ZeroInput(_Pc0),
+    .ZeroInput(_Pc4),
     .OneInput(_ALUM2DRout),
     .Control(WrRegData),
     .DataOutput(_WBdata)
@@ -128,7 +130,7 @@ GeneralRegisters registers(
     .DataOfWrite(_WBdata),
     .WriteControl(RegWre),
     .Clock(clk),
-    .CleanAllControl(1),
+    .CleanAllControl(1'b0),
     .ReadData1(_RgData1),
     .ReadData2(_RgData2)
     );

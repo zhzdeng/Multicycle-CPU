@@ -33,11 +33,13 @@ module textFile;
 	wire RegWre;
 	wire ALUSrcB;
 	wire ALUM2Reg;
+	wire WrRegData;
 	wire [1:0] PCSrc;
 	wire [2:0]ALUOp;
 	wire DataMemRW;
 	wire zero;
 	wire [31:0] _PcIn;
+	wire [31:0]_ALUout;
 	wire [31:0] _Pc0;
 	wire [31:0] _Pc4;
 	wire [31:0] _instruction;
@@ -68,8 +70,10 @@ module textFile;
 		.ALUM2Reg(ALUM2Reg),
 		.PCSrc(PCSrc),
 		.ALUOp(ALUOp),
+		.WrRegData(WrRegData),
 		.DataMemRW(DataMemRW),
 		.zero(zero),
+		._ALUout(_ALUout),
 		._PcIn(_PcIn),
 		._Pc0(_Pc0),
 		._Pc4(_Pc4),
@@ -122,9 +126,9 @@ module textFile;
 		// _DataOut = 0;
 		// _WriteData = 0;
 		clk = 1;
-		forever #50 clk = !clk;
+		forever #20 clk = !clk;
 		// Wait 100 ns for global reset to finish
-		#300 $stop;
+		#19000 $stop;
 
 		// Add stimulus here
 

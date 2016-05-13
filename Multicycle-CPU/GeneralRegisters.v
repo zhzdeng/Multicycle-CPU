@@ -47,7 +47,7 @@ module GeneralRegisters(
    end
 
 	 always @(negedge Clock) begin
-		if (CleanAllControl == 0) begin
+		if (CleanAllControl == 1) begin
 			//integer i = 1;
 			for (i = 1; i < 32; i = i + 1)
 				registers[i] <= 0;

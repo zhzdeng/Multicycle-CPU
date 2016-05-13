@@ -25,7 +25,7 @@ module IR(
     output reg [31:0] instructionOut
     );
 
-    always @(posedge CLK) begin
+    always @(negedge CLK) begin
 	     if (IRWre == 1) instructionOut = instructionIn;
 	 end
 
