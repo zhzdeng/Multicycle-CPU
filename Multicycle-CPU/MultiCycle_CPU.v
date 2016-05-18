@@ -54,13 +54,14 @@ module MultiCycle_CPU(
     input [31:0]_DataOut,
     input [31:0]_WriteData
     );
-
+reg clear;
+initial
+    clear = 0;
 // IF
 PC pc(
       .addressIn(_PcIn),                  // 指令输入，经过PC判断后输出
       .PCWre(PCWre),                      // CU控制信号
       .CLK(clk),                          // 时钟信号
-      .RST(1'b0),                            // PC归零信号
       .addressOut(_Pc0)                   // 指令输出
     );
 
@@ -94,7 +95,7 @@ Control_Unit cu(
     clk,
     _instruction[31:26],
     zero,
-    1'b0,
+    clear,
     PCWre,                       // PC的enable 1: 工作 halt : 0;
     ALUSrcB,                     // ALU的数据端选择
     ALUM2Reg,                    // 只有lw：1
@@ -130,7 +131,7 @@ GeneralRegisters registers(
     .DataOfWrite(_WBdata),
     .WriteControl(RegWre),
     .Clock(clk),
-    .CleanAllControl(1'b0),
+    .CleanAllControl(clear),
     .ReadData1(_RgData1),
     .ReadData2(_RgData2)
     );

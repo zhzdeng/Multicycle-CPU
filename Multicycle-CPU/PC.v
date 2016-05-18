@@ -22,17 +22,13 @@ module PC(
     input [31:0] addressIn,
     input PCWre,
     input CLK,
-    input RST,
     output reg [31:0] addressOut
     );
 	 initial
 	     addressOut = 32 'h00000000;
 
-	 always @(posedge CLK or PCWre) begin
-      if (PCWre == 1 'b1) begin
-          addressOut = addressIn;
-          if (RST   == 1'b1)  addressOut = 32'h00000000;
-      end
+	 always @(posedge CLK) begin
+      if (PCWre == 1 'b1) addressOut = addressIn;
 	 end
 
 endmodule
