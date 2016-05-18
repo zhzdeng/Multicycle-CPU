@@ -244,8 +244,7 @@ module Control_Unit(
 
 		always @(zero) begin
 			if (opcode == 6'b110100) begin
-				if (zero == 0) PCSrc = 2'b00;
-				else if (zero == 1) PCSrc = 2'b01;
+				if (zero == 1) PCSrc = 2'b01;
 				else PCSrc = 2'bzz;
 			end
 		end
