@@ -28,7 +28,9 @@ module PC(
 	     addressOut = 32 'h00000000;
 
 	 always @(posedge CLK) begin
-      if (PCWre == 1 'b1) addressOut = addressIn;
+      if (PCWre == 1 'b1) begin
+          addressOut = addressIn;
+      end
 	 end
 
 endmodule

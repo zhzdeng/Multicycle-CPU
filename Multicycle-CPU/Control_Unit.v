@@ -52,18 +52,21 @@ module Control_Unit(
 			else begin
 				case(curState)
 					3'b000: begin // IF 这里没有考虑halt
-						PCWre     <= 1;
-						ALUSrcB   <= 1'bz;
-						ALUM2Reg  <= 1'bz;
-						RegWre    <= 0;
-						WrRegData <= 1'bz;
-						DataMemRW <= 1'bz;
-						IRWre     <= 1;
-						Extsel    <= 2'b11;
-						ALUOp     <= 3'bzzz;
-						PCSrc     <= 2'bzz;
-						RegOut    <= 2'bzz;
-						curState  <= 3'b001;
+						if (opcode != 6'b111111) begin
+							PCWre     <= 1;
+							ALUSrcB   <= 1'bz;
+							ALUM2Reg  <= 1'bz;
+							RegWre    <= 0;
+							WrRegData <= 1'bz;
+							DataMemRW <= 1'bz;
+							IRWre     <= 1;
+							Extsel    <= 2'b11;
+							ALUOp     <= 3'bzzz;
+							PCSrc     <= 2'bzz;
+							RegOut    <= 2'bzz;
+							curState  <= 3'b001;
+						end
+						else curState <= 3'b000;
 					end
 
 					3'b001: begin // ID
