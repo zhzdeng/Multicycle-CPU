@@ -238,8 +238,10 @@ module Control_Unit(
 					end
 
 					3'b100: begin // WB
-						RegWre   <= 1;
-						curState <= 3'b000;
+						ALUM2Reg  <= 1;
+						WrRegData <= 1;
+						RegWre    <= 1;
+						curState  <= 3'b000;
 					end
 				endcase
 			end

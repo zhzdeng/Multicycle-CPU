@@ -125,7 +125,7 @@ module textFile;
 		// _ALUResult = 0;
 		// _DataOut = 0;
 		// _WriteData = 0;
-		clk = 1;
+		clk = 0;
 		forever #20 clk = !clk;
 		// Wait 100 ns for global reset to finish
 		#3000 $stop;
